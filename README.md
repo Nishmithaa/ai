@@ -284,3 +284,107 @@ Steps: <br>
 4 2<br>
 0 2<br>
 True<br>
+
+**8 puzzels**<br>
+import copy<br>
+from heapq import heappush, heappop<br>
+n = 3
+row = [ 1, 0, -1, 0 ]<br>
+col = [ 0, -1, 0, 1 ]<br>
+
+class priorityQueue:<br>
+    def __init__(self):<br>
+        self.heap = []<br>
+    def push(self, k):<br>
+         heappush(self.heap, k)<br>
+    def pop(self):<br>
+        return heappop(self.heap)
+    def empty(self):<br>
+        if not self.heap:<br>
+            return True<br>
+        else:<br>
+            return False<br>
+
+class node:<br>
+        def __init__(self, parent, mat, empty_tile_pos,cost, level):<br>
+            self.parent = parent<br>
+            self.mat = mat<br>
+            self.empty_tile_pos = empty_tile_pos<br>
+            self.cost = cost<br>
+            self.level = level<br>
+            
+        def __lt__(self, nxt):<br>
+            return self.cost < nx<br>.cost<br>
+def calculateCost(mat, final) -> int:<br>
+    count = 0<br>
+    for i in range(n):<br>
+        for j in range(n):<br>
+            if ((mat[i][j]) and (mat[i][j] != final[i][j])):
+                count += 1<br>
+    return count<br>
+
+def newNode(mat, empty_tile_pos, new_empty_tile_pos,level, parent, final) -> node:
+    new_mat = copy.deepcopy(mat)<br>
+    x1 = empty_tile_pos[0]<br>
+    y1 = empty_tile_pos[1]<br>
+    x2 = new_empty_tile_pos[0]<br>
+    y2 = new_empty_tile_pos[1]<br>
+    new_mat[x1][y1], new_mat[x2][y2] = new_mat[x2][y2], new_mat[x1][y1]<br>
+    cost = calculateCost(new_mat, final)<br>
+    new_node = node(parent, new_mat, new_empty_tile_pos,cost, level)<br>
+    return new_node<br>
+
+def printMatrix(mat):<br>
+    for i in range(n):<br>
+        for j in range(n):<br>
+            print("%d " % (mat[i][j]), end = " ")
+        print()<br>
+
+def isSafe(x, y):<br>
+    return x >= 0 and x < n and y >= 0 and y < n<br>
+
+def printPath(root):<br>
+    if root == None:<br>
+        return<br>
+    printPath(root.parent)<br>
+    printMatrix(root.mat)<br>
+    print()<br>
+    
+def solve(initial, empty_tile_pos, final):<br>
+    pq = priorityQueue()<br>
+    cost = calculateCost(initial, final)<br>
+    root = node(None, initial,empty_tile_pos, cost, 0)<br>
+    pq.push(root)<br>
+    while not pq.empty():<br>
+        minimum = pq.pop()<br>
+        if minimum.cost == 0:<br>
+            printPath(minimum)<br>
+            return<br>
+        for i in range(n):<br>
+            new_tile_pos = [minimum.empty_tile_pos[0] + row[i],minimum.empty_tile_pos[1] + col[i], ]<br>
+            if isSafe(new_tile_pos[0], new_tile_pos[1]):<br>
+                child=newNode(minimum.mat,minimum.empty_tile_pos,new_tile_pos,minimum.level+1,minimum,final,)<br>
+                pq.push(child)
+initial = [ [ 1, 2, 3 ],[ 5, 6, 0 ],[ 7, 8, 4 ] ]<br>
+final = [ [ 1, 2, 3 ],[ 5, 8, 6 ],[ 0, 7, 4 ] ]<br>
+empty_tile_pos = [ 1, 2 ]<br>
+solve(initial, empty_tile_pos, final)<br>
+
+**Output**<br>
+1  2  3  <br>
+5  6  0  <br>
+7  8  4  <br>
+
+1  2  3  <br>
+5  0  6  <br>
+7  8  4  <br>
+
+1  2  3  <br>
+5  8  6  <br>
+7  0  4  <br>
+
+1  2  3  <br>
+5  8  6  <br>
+0  7  4  <br>
+
+​
