@@ -424,3 +424,82 @@ def train(c,t):<br>
  
 #obtaining the final hypothesis<br>
 print("\n The final hypothesis is:",train(d,target))<br>
+
+
+
+**10.Write a program to implement the Candidate-Elimination algorithm, For a given set of training data examples stored in a .CSV file.**<br>
+import csv<br><br><br><br><br><br><br><br><br><br><br>
+with open("Train.csv")as csv_file:<br><br><br><br><br><br><br><br><br><br>
+    #csv_file=csv.reader(f)<br><br><br><br><br><br><br><br><br>
+    #data=list(csv_file)<br>
+    readcsv=csv.reader(csv_file,delimiter=',')<br><br><br><br><br><br><br>
+    data=[]<br><br><br><br><br><br>
+    for row in readcsv:<br><br><br><br><br>
+        data.append(row)<br><br><br><br>
+    s=data[1][:-1]<br><br><br>
+    g=[['?'for i in range(len(s))]for j in range(len(s))]<br><br>
+    for i in data:<br>
+        if i[-1]=="Yes":<br>
+            for j in range(len(s)):<br>
+                if i[j]!=s[j]:<br>
+                    s[j]='?'<br>
+                    g[j][j]='?'<br>
+        elif i[-1]=="No":<br>
+            for j in range(len(s)):<br>
+                if i[j]!=s[j]:<br>
+                      g[j][j]=s[j]<br>
+                else:<br>
+                    g[j][j]="?"<br>
+        print("\n steps of candidate elimination algorithm",data.index(i)+1)<br>
+        print(s)<br>
+        print(g)<br>
+    gh=[]<br>
+    for i in g:<br>
+        for j in i:<br>
+        
+            if j!='?':<br>
+            
+                gh.append(i)<br>
+                
+                break<br>
+                
+    print("\nFinal specific hypothesis:\n",s)<br>
+    
+    print("\nFinal general hypothesis:\n",gh)   <br>
+    
+    steps of candidate elimination algorithm 1<br>
+['Sunny', 'Warm', '?', 'Strong', 'Warm', 'Same']<br>
+
+[['?', '?', '?', '?', '?', '?'], ['?', '?', '?', '?', '?', '?'], ['?', '?', '?', '?', '?', '?'], ['?', '?', '?', '?', '?', '?'], ['?', '?', '?', '?', '?', '?'], ['?', '?', '?', '?', '?', '?']]<br>
+
+
+ steps of candidate elimination algorithm 2<br>
+ 
+['Sunny', 'Warm', '?', 'Strong', 'Warm', 'Same']<br>
+
+[['?', '?', '?', '?', '?', '?'], ['?', '?', '?', '?', '?', '?'], ['?', '?', '?', '?', '?', '?'], ['?', '?', '?', '?', '?', '?'], ['?', '?', '?', '?', '?', '?'], ['?', '?', '?', '?', '?', '?']]<br>
+
+
+ steps of candidate elimination algorithm 3<br>
+ 
+['Sunny', 'Warm', '?', 'Strong', 'Warm', 'Same']<br>
+
+[['Sunny', '?', '?', '?', '?', '?'], ['?', 'Warm', '?', '?', '?', '?'], ['?', '?', '?', '?', '?', '?'], ['?', '?', '?', '?', '?', '?'], ['?', '?', '?', '?', '?', '?'], ['?', '?', '?', '?', '?', 'Same']]<br>
+
+
+ steps of candidate elimination algorithm 4<br>
+ 
+['Sunny', 'Warm', '?', 'Strong', '?', '?']<br>
+
+[['Sunny', '?', '?', '?', '?', '?'], ['?', 'Warm', '?', '?', '?', '?'], ['?', '?', '?', '?', '?', '?'], ['?', '?', '?', '?', '?', '?'], ['?', '?', '?', '?', '?', '?'], ['?', '?', '?', '?', '?', '?']]<br>
+
+
+Final specific hypothesis:<br>
+
+ ['Sunny', 'Warm', '?', 'Strong', '?', '?']<br>
+ 
+
+Final general hypothesis:<br>
+
+ [['Sunny', '?', '?', '?', '?', '?'], ['?', 'Warm', '?', '?', '?', '?']]<br>
+ <br>
