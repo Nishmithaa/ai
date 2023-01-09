@@ -621,7 +621,7 @@ def newNode(mat, empty_tile_pos, new_empty_tile_pos,<br>
 					cost, level)<br>
 	return new_node<br>
 
-# Function to print the N x N matrix<br>
+Function to print the N x N matrix<br>
 def printMatrix(mat):<br>
 	
 	for i in range(n):<br>
@@ -630,8 +630,8 @@ def printMatrix(mat):<br>
 			
 		print()<br>
 
-# Function to check if (x, y) is a valid<br>
-# matrix coordinate<br>
+ Function to check if (x, y) is a valid<br>
+matrix coordinate<br>
 def isSafe(x, y):<br>
 	
 	return x >= 0 and x < n and y >= 0 and y < n<br>
@@ -700,28 +700,27 @@ def solve(initial, empty_tile_pos, final):<br>
 				# Add child to list of live nodes<br>
 				pq.push(child)<br>
 
-# Driver Code<br>
-
-# Initial configuration<br>
-# Value 0 is used for empty space<br>
+Driver Code<br>
+ Initial configuration<br>
+ Value 0 is used for empty space<br>
 initial = [ [ 1, 2, 3 ],<br>
 			[ 5, 6, 0 ],<br>
 			[ 7, 8, 4 ] ]<br>
 
-# Solvable Final configuration<br>
-# Value 0 is used for empty space<br>
+ Solvable Final configuration<br>
+ Value 0 is used for empty space<br>
 final = [ [ 1, 2, 3 ],<br>
 		[ 5, 8, 6 ],<br>
 		[ 0, 7, 4 ] ]<br>
 
-# Blank tile coordinates in<br>
-# initial configuration<br>
+Blank tile coordinates in<br>
+initial configuration<br>
 empty_tile_pos = [ 1, 2 ]<br>
 
-# Function call to solve the puzzle<br>
+ Function call to solve the puzzle<br>
 solve(initial, empty_tile_pos, final)<br>
 
-# This code is contributed by Kevin Joshi<br>
+This code is contributed by Kevin Joshi<br>
 1  2  3  <br>
 5  6  0  <br>
 7  8  4  <br>
